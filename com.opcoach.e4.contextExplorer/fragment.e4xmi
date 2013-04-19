@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_-6AacKkUEeKe3ed8WrDKZA">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_sBylAKkZEeKe3ed8WrDKZA" featurename="children" parentElementId="org.eclipse.ui.main.menu">
+    <elements xsi:type="menu:Menu" xmi:id="_Lw0ikKkaEeKe3ed8WrDKZA" elementId="com.opcoach.e4.contextexplorer.menu.0" label="ContextExplorer">
+      <children xsi:type="menu:DirectMenuItem" xmi:id="_MVQFUKkaEeKe3ed8WrDKZA" elementId="com.opcoach.e4.contextexplorer.directmenuitem.0" label="Open ContextExplorer" contributionURI="bundleclass://com.opcoach.e4.contextExplorer/com.opcoach.e4.contextExplorer.handler.ContextExplorerPartHandler"/>
+    </elements>
+  </fragments>
+</fragment:ModelFragments>
