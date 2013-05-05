@@ -5,7 +5,6 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
-@SuppressWarnings("restriction")
 public class ContextExplorerPartHandler {
 	@Execute
 	public void execute(EPartService partService) {
