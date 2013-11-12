@@ -29,8 +29,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Table;
 
-public class ContextExplorerPart
-{
+@SuppressWarnings("restriction")
+public class ContextExplorerPart {
 
 	private TreeViewer tv;
 
@@ -39,22 +39,19 @@ public class ContextExplorerPart
 	@Inject
 	private ESelectionService selService;
 
-	public ContextExplorerPart()
-	{
+	public ContextExplorerPart() {
 	}
 
 	/**
 	 * Create contents of the view part.
 	 */
 	@PostConstruct
-	public void createControls(Composite parent, MApplication a)
-	{
+	public void createControls(Composite parent, MApplication a) {
 
 		SashForm sashForm = new SashForm(parent, SWT.VERTICAL);
 
 		// TreeViewer on the top
 		tv = new TreeViewer(sashForm);
-		
 
 		tv.setContentProvider(new ContextTreeContentProvider());
 		tv.setLabelProvider(new ContextLabelProvider());
@@ -64,24 +61,23 @@ public class ContextExplorerPart
 		tv.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			@Override
-			public void selectionChanged(SelectionChangedEvent event)
-			{
-				IStructuredSelection ss = (IStructuredSelection) event.getSelection();
-				selService.setSelection((ss.size() == 1) ? ss.getFirstElement() : ss.toArray());
+			public void selectionChanged(SelectionChangedEvent event) {
+				IStructuredSelection ss = (IStructuredSelection) event
+						.getSelection();
+				selService.setSelection((ss.size() == 1) ? ss.getFirstElement()
+						: ss.toArray());
 
 			}
 		});
 
 		createContextContentTable(a, sashForm);
-		
+
 		// Set the correct weight for sahsform
 		sashForm.setWeights(new int[] { 15, 85 });
 
-
 	}
 
-	private void createContextContentTable(MApplication a, SashForm sashForm)
-	{
+	private void createContextContentTable(MApplication a, SashForm sashForm) {
 		contentTable = new TableViewer(sashForm);
 		contentTable.setContentProvider(new ContextTableContentProvider());
 
@@ -94,32 +90,33 @@ public class ContextExplorerPart
 		cTable.setLayoutData(gd_cTable);
 
 		// Create the first column for firstname
-		TableViewerColumn firstNameCol = new TableViewerColumn(contentTable, SWT.NONE);
+		TableViewerColumn firstNameCol = new TableViewerColumn(contentTable,
+				SWT.NONE);
 		firstNameCol.getColumn().setWidth(400);
 		firstNameCol.getColumn().setText("Key");
 		firstNameCol.setLabelProvider(new ColumnLabelProvider() {
 			@Override
-			public String getText(Object element)
-			{
-				return ((Map.Entry<String, Object>) element).getKey().toString();
+			public String getText(Object element) {
+				return ((Map.Entry<String, Object>) element).getKey()
+						.toString();
 			}
 
 			@Override
-			public Color getForeground(Object element)
-			{
+			public Color getForeground(Object element) {
 				String s = ((Map.Entry<String, Object>) element).getKey();
-				return (s.startsWith("com.opcoach")) ? Display.getCurrent().getSystemColor(SWT.COLOR_BLUE) : null;
+				return (s.startsWith("com.opcoach")) ? Display.getCurrent()
+						.getSystemColor(SWT.COLOR_BLUE) : null;
 			}
 		});
 
 		// Create the second column for name
-		TableViewerColumn nameCol = new TableViewerColumn(contentTable, SWT.NONE);
+		TableViewerColumn nameCol = new TableViewerColumn(contentTable,
+				SWT.NONE);
 		nameCol.getColumn().setWidth(600);
 		nameCol.getColumn().setText("Value");
 		nameCol.setLabelProvider(new ColumnLabelProvider() {
 			@Override
-			public String getText(Object element)
-			{
+			public String getText(Object element) {
 				Object val = ((Map.Entry<String, Object>) element).getValue();
 				return (val == null) ? "null" : val.toString();
 			}
@@ -131,8 +128,8 @@ public class ContextExplorerPart
 	}
 
 	@Inject
-	public void setSelection(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) EclipseContext ctx)
-	{
+	public void setSelection(
+			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) EclipseContext ctx) {
 		if (ctx == null)
 			return;
 		contentTable.setInput(ctx);
@@ -140,12 +137,11 @@ public class ContextExplorerPart
 	}
 
 	@PreDestroy
-	public void dispose()
-	{
+	public void dispose() {
 	}
 
 	@Focus
-	public void setFocus()
-	{
+	public void setFocus() {
+		tv.getTree().setFocus();
 	}
 }
